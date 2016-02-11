@@ -4,16 +4,21 @@ var Trackpad = function ()
 	this.currentPos 			= new Vector2( 0, 0 );
 	this.startPos 				= new Vector2( 0, 0 );
 	this.vec 					= new Vector2( 0, 0 );
+	this.drawPos				= new Vector2( 0, 0 );
 	
-	this.size 	= 60;
+	this.size 					= 40;
 	this.originSizePercentage 	= 0.1;
 	this.padSizePercentage 		= 0.1;
 	this.padSize				= this.size * this.padSizePercentage;
 	this.axisColor				= "black";
 	this.padColor				= "red";
+	this.displayPadding			= 14;
 	
 	this.hasXAxis				= true;
 	this.hasYAxis				= true;
+	
+	this.xOutInverted			= 1;
+	this.yOutInverted			= -1;
 	
 	this.isVisible				= false;
 	
@@ -29,16 +34,6 @@ var Trackpad = function ()
 
 Trackpad.prototype =
 {
-	GetXMagnitude: function()
-	{
-		return ( Math.min( this.vec.x, this.size ) / this.size );
-	},
-	
-	GetYMagnitude: function()
-	{
-		return ( Math.min( this.vec.y, this.size ) / this.size );
-	},
-	
 	Reset: function()
 	{
 		this.xHasChanged			= true;
@@ -53,9 +48,6 @@ Trackpad.prototype =
 		
 		this.x						= 0;
 		this.y						= 0;
-		
-		this.xLast					= 0;
-		this.yLast					= 0;
 	},
 	
 	Update: function()
@@ -96,17 +88,16 @@ Trackpad.prototype =
 		{
 			y0 = 0;
 		}
+			
+		this.x = this.xOutInverted * ( x0 / this.size );
+		this.y = this.yOutInverted * ( y0 / this.size );
 		
+		this.xHasChanged = ( this.xLast != this.x );
+		this.yHasChanged = ( this.yLast != this.y );
 		
 		// Set output values
 		this.xLast = this.x;
 		this.yLast = this.y;
-		
-		this.x = x0 / this.size;
-		this.y = y0 / this.size;
-		
-		this.xHasChanged = ( this.xLast != this.x );
-		this.yHasChanged = ( this.yLast != this.y );
 	},
 	
 	Render: function( ctx )
@@ -122,33 +113,38 @@ Trackpad.prototype =
 			
 			if( this.hasYAxis )
 			{
-				ctx.moveTo( this.startPos.x, this.startPos.y - this.size );
-				ctx.lineTo( this.startPos.x, this.startPos.y + this.size );
+				ctx.moveTo( this.drawPos.x, this.drawPos.y - this.size );
+				ctx.lineTo( this.drawPos.x, this.drawPos.y + this.size );
 			}
 			
 			if( this.hasXAxis )
 			{
-				ctx.moveTo( this.startPos.x - this.size, this.startPos.y );
-				ctx.lineTo( this.startPos.x + this.size, this.startPos.y );
+				ctx.moveTo( this.drawPos.x - this.size, this.drawPos.y );
+				ctx.lineTo( this.drawPos.x + this.size, this.drawPos.y );
 			}
 			
 			ctx.stroke();
+			
+			// ctx.beginPath();
+			// ctx.textAlign="center"; 
+			// ctx.fillStyle = this.axisColor;
+			// ctx.fillText( "Forward", this.drawPos.x, this.drawPos.x + this.size + 0.5 * this.displayPadding ); 
 			
 			// Draw origin
 			ctx.beginPath();
 			ctx.strokeStyle = this.axisColor;
 			ctx.lineWidth = 4; 
 			
-			ctx.moveTo( this.startPos.x, this.startPos.y - ( this.size * this.originSizePercentage ) );
-			ctx.lineTo( this.startPos.x, this.startPos.y + ( this.size * this.originSizePercentage ) );
-			ctx.moveTo( this.startPos.x - ( this.size * this.originSizePercentage ), this.startPos.y );
-			ctx.lineTo( this.startPos.x + ( this.size * this.originSizePercentage ), this.startPos.y );
+			ctx.moveTo( this.drawPos.x, this.drawPos.y - ( this.size * this.originSizePercentage ) );
+			ctx.lineTo( this.drawPos.x, this.drawPos.y + ( this.size * this.originSizePercentage ) );
+			ctx.moveTo( this.drawPos.x - ( this.size * this.originSizePercentage ), this.drawPos.y );
+			ctx.lineTo( this.drawPos.x + ( this.size * this.originSizePercentage ), this.drawPos.y );
 			
 			ctx.stroke();
 	
 			// Draw pad
-			var xPos = this.startPos.x + this.x * this.size;
-			var yPos = this.startPos.y + this.y * this.size;
+			var xPos = this.drawPos.x + this.x * this.size * this.xOutInverted;
+			var yPos = this.drawPos.y + this.y * this.size * this.yOutInverted;
 			
 			ctx.fillStyle = this.padColor;
 			ctx.beginPath(); 
@@ -161,12 +157,26 @@ Trackpad.prototype =
 				ctx.beginPath();
 				ctx.strokeStyle = this.padColor;
 				ctx.lineWidth = 2; 
-				ctx.moveTo( this.startPos.x - ( this.size * this.originSizePercentage ), yPos  );
-				ctx.lineTo( this.startPos.x + ( this.size * this.originSizePercentage ), yPos  );
-				ctx.moveTo( xPos, this.startPos.y - ( this.size * this.originSizePercentage ) );
-				ctx.lineTo( xPos, this.startPos.y + ( this.size * this.originSizePercentage )  );
+				
+				ctx.moveTo( this.drawPos.x - ( this.size * this.originSizePercentage ), yPos  );
+				ctx.lineTo( this.drawPos.x + ( this.size * this.originSizePercentage ), yPos  );
+				
+				ctx.moveTo( xPos, this.drawPos.y - ( this.size * this.originSizePercentage ) );
+				ctx.lineTo( xPos, this.drawPos.y + ( this.size * this.originSizePercentage )  );
 				ctx.stroke();
 			}
+			
+			// Render thumb circles
+			ctx.beginPath(); 
+			ctx.strokeStyle = this.axisColor; 
+			ctx.lineWidth = 6; 
+			ctx.arc(this.startPos.x, this.startPos.y, this.size,0,Math.PI*2,true); 
+			ctx.stroke();
+
+			ctx.beginPath(); 
+			ctx.strokeStyle = this.axisColor; 
+			ctx.arc(this.currentPos.x, this.currentPos.y, this.size * 0.5, 0,Math.PI*2, true); 
+			ctx.stroke(); 
 		}
 	}
 };

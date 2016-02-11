@@ -62,8 +62,7 @@
 					ctx    = canvas.getContext('2d');
 					
 					// Set up trackpad parameters
-					rightTrack.hasXAxis = false;
-					
+					rightTrack.hasXAxis = false;				
 					
 					// Register event listeners
 					this.registerEvents();
@@ -102,6 +101,9 @@
 					
 					canvasHalfWidth 	= canvas.width / 2; 
 					canvasHalfHeight 	= canvas.height / 2;
+					
+					leftTrack.drawPos.reset( leftTrack.size + leftTrack.displayPadding, leftTrack.size + leftTrack.displayPadding );
+					rightTrack.drawPos.reset( canvas.width - rightTrack.size - rightTrack.displayPadding, rightTrack.size + rightTrack.displayPadding );
 					
 					this.draw();
 				},
@@ -215,11 +217,14 @@
 						var touch = e.changedTouches[i]; 
 						if( leftTrack.id == touch.identifier )
 						{
-							leftTrack.Reset();		
+							leftTrack.Reset();
+							this.fire( 'leftTrackX', { val: leftTrack.x } );
+							this.fire( 'leftTrackY', { val: leftTrack.y } );		
 						}
 						else if( rightTrack.id == touch.identifier )
 						{
 							rightTrack.Reset();
+							this.fire( 'rightTrackY', { val: rightTrack.y } );
 						}	
 					}
 					

@@ -34,17 +34,17 @@
   <script>
 		document.querySelector('orov-thumbstick').addEventListener( 'leftTrackX', function (e) 
 		{
-			console.log(e.detail.val ); 
+			console.log( "yaw: " + e.detail.val ); 
 		})
 		
 		document.querySelector('orov-thumbstick').addEventListener( 'leftTrackY', function (e) 
 		{
-			console.log(e.detail.val ); 
+			console.log( "throttle: " + e.detail.val ); 
 		})	
 		
 		document.querySelector('orov-thumbstick').addEventListener( 'rightTrackY', function (e) 
 		{
-			console.log(e.detail.val ); 
+			console.log("vertical: " + e.detail.val ); 
 		})	
 	</script>
 </html>
