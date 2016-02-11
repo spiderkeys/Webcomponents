@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+     <meta name="mobile-web-app-capable" content="yes">
+	 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, target-densitydpi=device-dpi, minimal-ui" />
+	
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="orov-thumbstick.html">
+	
+	<style>
+		body 
+		{
+			height: 100%;
+			overflow: hidden; /* keeps scrollbar off IE */
+			font-family: arial,sans-serif;
+			font-size: 13px;
+			color: #000;
+			background-color: white;
+			padding:0px;
+			margin:0px;
+			text-align:center;
+		}
+	</style>
+
+  </head>
+  <body>
+	  <div style="height:100vh;width:100%">
+	  	<orov-thumbstick></orov-thumbstick>
+	  </div>
+	  
+  </body>
+  
+  <script>
+		document.querySelector('orov-thumbstick').addEventListener( 'leftTrackX', function (e) 
+		{
+			console.log(e.detail.val ); 
+		})
+		
+		document.querySelector('orov-thumbstick').addEventListener( 'leftTrackY', function (e) 
+		{
+			console.log(e.detail.val ); 
+		})	
+		
+		document.querySelector('orov-thumbstick').addEventListener( 'rightTrackY', function (e) 
+		{
+			console.log(e.detail.val ); 
+		})	
+	</script>
+</html>
