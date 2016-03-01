@@ -1,0 +1,151 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/device-icons.html">
+
+<dom-module id="radial-menu">
+	<style type="text/css">
+		:host
+		{
+			position: absolute;
+		}
+		
+		.mybuttons 
+		{
+			width: 250px;
+			height: 250px;
+			opacity: 0;
+			
+			border-radius: 50%;
+			background-color: rgba( 00, 00, 00, 0.5 ); 
+			
+			-webkit-transform: scale(0) translate(0px,0px);
+			-moz-transform: scale(0) translate(0px,0px);
+			transform: scale(0) translate(0px,0px);
+			
+			-webkit-transition: all 0.4s ease-out;
+			-moz-transition: all 0.4s ease-out;
+			transition: all 0.4s ease-out;
+		}
+		
+		.open.mybuttons 
+		{
+			opacity: 1;
+			
+			-webkit-transform: scale(1) translate(50px,100px);
+			-moz-transform: scale(1) translate(50px,100px);
+			transform: scale(1) translate(50px,100px);
+		}
+		
+		.mybuttons paper-fab 
+		{
+			--paper-fab-background: rgba( 0, 0, 0, 0 );
+			text-decoration: none;
+			color: white;
+			height: 40px;
+			width: 40px;
+			position: absolute;
+			border-radius: 50%;
+			border: 1px solid white;
+		}
+		
+		.mybuttons paper-fab:hover 
+		{
+			background-color: white;
+			color: black;
+		}
+		
+		paper-fab.menu-button
+		{
+			color: white;
+			border-radius: 50%;
+			background-color: rgba( 00, 00, 00, 0.5 );
+			width: 60px;
+			height: 60px;
+			
+		}
+		
+		paper-fab.menu-button:hover 
+		{
+			background-color: white;
+			color: black;
+		}
+		
+		
+
+	</style>
+
+	<template>
+		
+		
+			<paper-fab class="menu-button" id="menu-button" icon="apps"></paper-fab>
+			
+			<div class="mybuttons">
+				<paper-fab icon="apps"></paper-fab>
+				<paper-fab icon="apps"></paper-fab>
+				<paper-fab icon="apps"></paper-fab>
+				<paper-fab icon="apps"></paper-fab>
+				<paper-fab icon="apps"></paper-fab>
+				<paper-fab icon="apps"></paper-fab>
+				<paper-fab icon="apps"></paper-fab>
+			</div>
+			
+			
+		
+	</template>
+	
+	<script>
+		
+		
+		( function()
+		{
+			Polymer(
+			{
+				is: 'radial-menu',
+				
+				properties: 
+				{
+				},
+				
+				listeners: 
+				{
+        			'menu-button.tap': 'regularTap'
+				},
+				
+				attached: function()
+				{
+					var elems = this.querySelectorAll('.mybuttons paper-fab');
+					var increase = Math.PI * 2 / elems.length;
+					var x = 0, y = 0, angle = 0;
+					
+					console.log( elems.length );
+
+					for (var i = 0; i < elems.length; i++) 
+					{
+						elem = elems[i];
+						// modify to change the radius and position of a circle
+						x = 100 * Math.cos(angle) + 105;
+						y = 100 * Math.sin(angle)  + 105;
+						elem.style.position = 'absolute';
+						elem.style.left = x + 'px';
+						elem.style.top = y + 'px';
+						angle += increase;
+					}
+					
+					
+				},
+				
+				regularTap: function(e)
+				{					
+					e.preventDefault(); 
+					console.log( "hello");
+					
+					var elems = this.querySelector('.mybuttons');
+					elems.classList.toggle( 'open' );
+				}
+				
+			} );
+		}() );
+		
+	</script>
+</dom-module>

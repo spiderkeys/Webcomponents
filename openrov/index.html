@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+	<link rel="manifest" href="manifest.webmanifest">
+	
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	
+	<!-- Webcomponents -->
+	<link rel="import" href="../mobile-header/mobile-header.html">
+	<link rel="import" href="../mobile-compass/mobile-compass.html">
+	<link rel="import" href="../dual-thumbstick/dual-thumbstick.html">
+	<link rel="import" href="../radial-menu/radial-menu.html">
+  </head>
+  
+  
+  <!-- Body -->
+  <body>
+	  
+	<div id="UI" class="full-screen">
+		
+		<!-- Video -->
+		<div class="video">
+			<!-- Control elements -->
+			<dual-thumbstick></dual-thumbstick>
+			
+			<img src="../img/mockvideo.jpeg" />
+		</div>
+		
+		<!-- Header -->
+		<mobile-header></mobile-header>	
+		
+		<!-- Other elements -->
+		<mobile-compass></mobile-compass>
+	
+	</div>	  
+	
+  </body>
+  
+</html>

@@ -1,0 +1,16 @@
+{
+  "lang": "en",
+  "name": "OpenROV Mobile Theme",
+  "short_name": "OROVMobile",
+  "icons": [{
+        "src": "img/icons/icon",
+        "sizes": "64x64",
+        "type": "image/png"
+      }],
+  "splash_screens": [],
+  "scope": "/openrov/",
+  "start_url": "/openrov/index.html",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "theme_color": "aliceblue"
+}

@@ -1,0 +1,36 @@
+body 
+{
+	height: 100%;
+	overflow: hidden; /* keeps scrollbar off IE */
+	font-family: arial,sans-serif;
+	font-size: 13px;
+	color: #000;
+	background-color: white;
+	padding:0px;
+	margin:0px;
+	text-align:center;
+}
+
+#UI
+{
+	background-color: white;
+	width: 100%;
+	height: 100vh;
+}
+
+.video 
+{
+	width: 100%;
+	height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+
+.video img 
+{
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}

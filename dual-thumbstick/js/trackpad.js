@@ -5,6 +5,7 @@ var Trackpad = function ()
 	this.startPos 				= new Vector2( 0, 0 );
 	this.vec 					= new Vector2( 0, 0 );
 	this.drawPos				= new Vector2( 0, 0 );
+	this.canvasPos				= new Vector2( 0, 0 );
 	
 	this.size 					= 40;
 	this.originSizePercentage 	= 0.1;
@@ -12,7 +13,9 @@ var Trackpad = function ()
 	this.padSize				= this.size * this.padSizePercentage;
 	this.axisColor				= "black";
 	this.padColor				= "red";
-	this.displayPadding			= 14;
+		
+	this.xPadding				= 100;
+	this.yPadding				= 14;
 	
 	this.hasXAxis				= true;
 	this.hasYAxis				= true;
@@ -125,11 +128,6 @@ Trackpad.prototype =
 			
 			ctx.stroke();
 			
-			// ctx.beginPath();
-			// ctx.textAlign="center"; 
-			// ctx.fillStyle = this.axisColor;
-			// ctx.fillText( "Forward", this.drawPos.x, this.drawPos.x + this.size + 0.5 * this.displayPadding ); 
-			
 			// Draw origin
 			ctx.beginPath();
 			ctx.strokeStyle = this.axisColor;
@@ -170,12 +168,12 @@ Trackpad.prototype =
 			ctx.beginPath(); 
 			ctx.strokeStyle = this.axisColor; 
 			ctx.lineWidth = 6; 
-			ctx.arc(this.startPos.x, this.startPos.y, this.size,0,Math.PI*2,true); 
+			ctx.arc(this.startPos.x - this.canvasPos.x, this.startPos.y - this.canvasPos.y, this.size,0,Math.PI*2,true); 
 			ctx.stroke();
 
 			ctx.beginPath(); 
 			ctx.strokeStyle = this.axisColor; 
-			ctx.arc(this.currentPos.x, this.currentPos.y, this.size * 0.5, 0,Math.PI*2, true); 
+			ctx.arc(this.currentPos.x - this.canvasPos.x, this.currentPos.y - this.canvasPos.y, this.size * 0.5, 0,Math.PI*2, true); 
 			ctx.stroke(); 
 		}
 	}
