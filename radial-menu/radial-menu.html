@@ -1,62 +1,21 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-icons/device-icons.html">
+<link rel="import" href="../bower_components/iron-icons/image-icons.html">
+<link rel="import" href="../bower_components/iron-icons/notification-icons.html">
+<link rel="import" href="../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../labeled-icon-button/labeled-icon-button.html">
 
 <dom-module id="radial-menu">
 	<style type="text/css">
-		:host
+		paper-icon-button.menu-button
 		{
-			position: absolute;
-		}
-		
-		.mybuttons 
-		{
-			width: 250px;
-			height: 250px;
-			opacity: 0;
-			
-			border-radius: 50%;
-			background-color: rgba( 00, 00, 00, 0.5 ); 
-			
-			-webkit-transform: scale(0) translate(0px,0px);
-			-moz-transform: scale(0) translate(0px,0px);
-			transform: scale(0) translate(0px,0px);
-			
-			-webkit-transition: all 0.4s ease-out;
-			-moz-transition: all 0.4s ease-out;
-			transition: all 0.4s ease-out;
-		}
-		
-		.open.mybuttons 
-		{
-			opacity: 1;
-			
-			-webkit-transform: scale(1) translate(50px,100px);
-			-moz-transform: scale(1) translate(50px,100px);
-			transform: scale(1) translate(50px,100px);
-		}
-		
-		.mybuttons paper-fab 
-		{
-			--paper-fab-background: rgba( 0, 0, 0, 0 );
-			text-decoration: none;
-			color: white;
-			height: 40px;
-			width: 40px;
-			position: absolute;
-			border-radius: 50%;
-			border: 1px solid white;
-		}
-		
-		.mybuttons paper-fab:hover 
-		{
-			background-color: white;
-			color: black;
-		}
-		
-		paper-fab.menu-button
-		{
+			display: block;
 			color: white;
 			border-radius: 50%;
 			background-color: rgba( 00, 00, 00, 0.5 );
@@ -65,33 +24,99 @@
 			
 		}
 		
-		paper-fab.menu-button:hover 
+		paper-icon-button.menu-button:hover 
 		{
 			background-color: white;
 			color: black;
 		}
 		
 		
+		.box-container 
+		{
+			opacity: 0;
+			margin-top: 10px;
+			border-radius: 5px;
+			background-color: rgba( 00, 00, 00, 0.5 );
+			
+			-webkit-transform: scale(0) ;
+			-moz-transform: scale(0) ;
+			transform: scale(0);
+			
+			-webkit-transition: all 0.4s ease-out;
+			-moz-transition: all 0.4s ease-out;
+			transition: all 0.4s ease-out;
+		}
+		
+		.open.box-container 
+		{
+			opacity: 1;
+			
+			-webkit-transform: scale(1);
+			-moz-transform: scale(1);
+			transform: scale(1);
+		}
+		
+		.box-container paper-icon-button 
+		{
+			margin: 3px;
+			max-width: 80px;
+			min-width: 60px;
+			max-height: 80px;
+			min-height: 60px;
+			--paper-fab-background: rgba( 0, 0, 0, 0 );
+			color: white;
+			border-radius: 5px;
+			border: 1px solid white;
+		}
+		
+		.box-container paper-icon-button:hover 
+		{
+			background-color: white;
+			color: black;
+		}
+		
+		.box-container labeled-icon-button 
+		{
+			margin: 3px;
+			max-width: 80px;
+			min-width: 60px;
+			max-height: 80px;
+			min-height: 60px;
+			--paper-fab-background: rgba( 0, 0, 0, 0 );
+			color: white;
+			border-radius: 5px;
+			border: 1px solid white;
+		}
+		
+		.box-container labeled-icon-button:hover 
+		{
+			background-color: white;
+			color: black;
+		}
+		
+		.flex-wrap 
+		{
+			@apply(--layout-horizontal);
+			@apply(--layout-wrap);
+			max-width: 300px;
+		}
 
 	</style>
 
 	<template>
-		
-		
-			<paper-fab class="menu-button" id="menu-button" icon="apps"></paper-fab>
+	
+			<paper-icon-button class="menu-button" id="menu-button" icon="apps"></paper-icon-button>			
 			
-			<div class="mybuttons">
-				<paper-fab icon="apps"></paper-fab>
-				<paper-fab icon="apps"></paper-fab>
-				<paper-fab icon="apps"></paper-fab>
-				<paper-fab icon="apps"></paper-fab>
-				<paper-fab icon="apps"></paper-fab>
-				<paper-fab icon="apps"></paper-fab>
-				<paper-fab icon="apps"></paper-fab>
+			<div class="box-container flex-wrap">
+				<labeled-icon-button class="flex" icon="device:gps-fixed" label="GPS"></labeled-icon-button>
+				<labeled-icon-button icon="notification:wifi" label="Network"></labeled-icon-button>
+				<labeled-icon-button icon="icons:fullscreen" label="Fullscreen"></labeled-icon-button>
+				<labeled-icon-button icon="notification:system-update" label="Update"></labeled-icon-button>
+				<labeled-icon-button icon="social:group" label="Social"></labeled-icon-button>
+				<labeled-icon-button icon="image:photo-library" label="Gallery"></labeled-icon-button>
+				<labeled-icon-button icon="device:widgets" label="Plugins"></labeled-icon-button>
 			</div>
-			
-			
-		
+
 	</template>
 	
 	<script>
@@ -114,23 +139,23 @@
 				
 				attached: function()
 				{
-					var elems = this.querySelectorAll('.mybuttons paper-fab');
-					var increase = Math.PI * 2 / elems.length;
-					var x = 0, y = 0, angle = 0;
+					// var elems = this.querySelectorAll('.box-container paper-fab');
+					// var increase = Math.PI * 2 / elems.length;
+					// var x = 0, y = 0, angle = 0;
 					
-					console.log( elems.length );
+					// console.log( elems.length );
 
-					for (var i = 0; i < elems.length; i++) 
-					{
-						elem = elems[i];
-						// modify to change the radius and position of a circle
-						x = 100 * Math.cos(angle) + 105;
-						y = 100 * Math.sin(angle)  + 105;
-						elem.style.position = 'absolute';
-						elem.style.left = x + 'px';
-						elem.style.top = y + 'px';
-						angle += increase;
-					}
+					// for (var i = 0; i < elems.length; i++) 
+					// {
+					// 	elem = elems[i];
+					// 	// modify to change the radius and position of a circle
+					// 	x = 100 * Math.cos(angle) + 105;
+					// 	y = 100 * Math.sin(angle)  + 105;
+					// 	elem.style.position = 'absolute';
+					// 	elem.style.left = x + 'px';
+					// 	elem.style.top = y + 'px';
+					// 	angle += increase;
+					// }
 					
 					
 				},
@@ -140,7 +165,7 @@
 					e.preventDefault(); 
 					console.log( "hello");
 					
-					var elems = this.querySelector('.mybuttons');
+					var elems = this.querySelector('.box-container');
 					elems.classList.toggle( 'open' );
 				}
 				
