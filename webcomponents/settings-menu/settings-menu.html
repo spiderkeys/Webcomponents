@@ -1,0 +1,57 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../grid-menu/grid-menu.html">
+<link rel="import" href="../grid-menu/grid-menu-button.html">
+
+<dom-module id="settings-menu">
+	
+	<style type="text/css">
+		:host
+		{
+			position: absolute;
+			top: 0;
+			right: 0px;
+		}
+		
+	</style>
+	
+	<template>
+		
+		<grid-menu horizontal-align="right" trigger-icon="apps">			
+				<grid-menu-button icon="hardware:toys" label="Motors"></grid-menu-button>
+				<grid-menu-button icon="icons:build" label="Calibrate"></grid-menu-button>
+				<grid-menu-button icon="image:palette" label="Theme"></grid-menu-button>
+				<grid-menu-button icon="hardware:videogame-asset" label="Controls"></grid-menu-button>
+				<grid-menu-button icon="icons:warning" label="Diagnostics"></grid-menu-button>
+				<grid-menu-button icon="image:camera-alt" label="Camera"></grid-menu-button>
+		</grid-menu>
+		
+	</template>
+	
+	
+	<script>
+		( function()
+		{
+			Polymer(
+			{
+				is: 'settings-menu',
+				
+				listeners:
+				{
+					'menuSelection': 'handleMenuSelection'
+				},
+				
+				handleMenuSelection: function(e)
+				{ 
+					console.log( e.detail.target );
+				},
+				
+				handleTap: function(e)
+				{
+					console.log( document.activeElement );
+				}
+			} );
+		}() );
+		
+	</script>
+</dom-module>

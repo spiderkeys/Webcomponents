@@ -10,30 +10,43 @@
 		
 		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 		
+		<script>
+			window.Polymer = window.Polymer || {};
+			window.Polymer.dom = 'shadow';
+		</script>
+		
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		
 		<!-- Webcomponents -->
-		<link rel="import" href="../webcomponents/mobile-header/mobile-header.html">
-		<link rel="import" href="../webcomponents/mobile-compass/mobile-compass.html">
-		<link rel="import" href="../webcomponents/dual-thumbstick/dual-thumbstick.html">
+		<link rel="import" href="../webcomponents/app-menu/app-menu.html">
+		<link rel="import" href="../webcomponents/settings-menu/settings-menu.html">
+		
 	</head>
+	
+	
   
 	<!-- Body -->
 	<body>
 		
-		<div id="UI" class="full-screen">
 		
+		<div id="UI" class="full-screen">
+			
 		<!-- Video -->
 		<div class="video overlay">
-			<!-- Control elements -->
 			<dual-thumbstick></dual-thumbstick>
 			
 			<img src="../img/mockvideo.jpeg" />
 		</div>
 		
-		<mobile-header class="overlay"></mobile-header>
-	
-	</div>	 
+		<settings-menu></settings-menu>
+		
+		<!--App menu-->
+		<app-menu></app-menu>
+		
+		<!--Setting menu-->
+		
+		
+		<!--Action bar-->
 	
 	</body>
   

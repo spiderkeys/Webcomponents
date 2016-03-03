@@ -1,17 +1,17 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../bower_components/iron-icons/device-icons.html">
-<link rel="import" href="../bower_components/iron-icons/image-icons.html">
-<link rel="import" href="../bower_components/iron-icons/notification-icons.html">
-<link rel="import" href="../bower_components/iron-icons/social-icons.html">
-<link rel="import" href="../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/device-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/image-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/notification-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../labeled-icon-button/labeled-icon-button.html">
 
-<dom-module id="radial-menu">
+<dom-module id="app-menu-backup">
 	<style type="text/css">
 	
 		paper-icon-button.menu-button
@@ -22,6 +22,7 @@
 			background-color: rgba( 00, 00, 00, 0.5 );
 			width: 60px;
 			height: 60px;
+
 			
 		}
 		
@@ -34,7 +35,9 @@
 		
 		.box-container 
 		{
-			
+			@apply(--layout-horizontal);
+			@apply(--layout-wrap);
+			width: 265px;
 			opacity: 0;
 			margin-top: 10px;
 			border-radius: 5px;
@@ -58,25 +61,6 @@
 			transform: scale(1);
 		}
 		
-		.box-container paper-icon-button 
-		{
-			margin: 3px;
-			max-width: 80px;
-			min-width: 60px;
-			max-height: 80px;
-			min-height: 60px;
-			--paper-fab-background: rgba( 0, 0, 0, 0 );
-			color: white;
-			border-radius: 5px;
-			border: 1px solid white;
-		}
-		
-		.box-container paper-icon-button:hover 
-		{
-			background-color: white;
-			color: black;
-		}
-		
 		.box-container labeled-icon-button 
 		{
 			margin: 3px;
@@ -95,13 +79,6 @@
 			background-color: white;
 			color: black;
 		}
-		
-		.flex-wrap 
-		{
-			@apply(--layout-horizontal);
-			@apply(--layout-wrap);
-			max-width: 300px;
-		}
 
 	</style>
 
@@ -109,14 +86,16 @@
 	
 			<paper-icon-button class="menu-button" id="menu-button" icon="apps"></paper-icon-button>			
 			
-			<div class="box-container flex-wrap">
-				<labeled-icon-button class="flex" icon="device:gps-fixed" label="GPS"></labeled-icon-button>
+			<div class="box-container">
+				<labeled-icon-button icon="maps:place" label="Map"></labeled-icon-button>
 				<labeled-icon-button icon="notification:wifi" label="Network"></labeled-icon-button>
-				<labeled-icon-button icon="icons:fullscreen" label="Fullscreen"></labeled-icon-button>
+				<labeled-icon-button icon="icons:visibility" label="VR"></labeled-icon-button>
 				<labeled-icon-button icon="notification:system-update" label="Update"></labeled-icon-button>
 				<labeled-icon-button icon="social:group" label="Social"></labeled-icon-button>
 				<labeled-icon-button icon="image:photo-library" label="Gallery"></labeled-icon-button>
-				<labeled-icon-button icon="device:widgets" label="Plugins"></labeled-icon-button>
+				<labeled-icon-button icon="icons:extension" label="Plugins"></labeled-icon-button>
+				<labeled-icon-button icon="icons:settings" label="Settings"></labeled-icon-button>
+				<labeled-icon-button icon="device:airplanemode-active" label="Cockpit"></labeled-icon-button>
 			</div>
 
 	</template>
@@ -128,7 +107,7 @@
 		{
 			Polymer(
 			{
-				is: 'radial-menu',
+				is: 'app-menu-backup',
 				
 				properties: 
 				{

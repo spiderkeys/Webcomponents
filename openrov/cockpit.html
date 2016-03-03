@@ -16,24 +16,40 @@
 		<link rel="import" href="../webcomponents/mobile-header/mobile-header.html">
 		<link rel="import" href="../webcomponents/mobile-compass/mobile-compass.html">
 		<link rel="import" href="../webcomponents/dual-thumbstick/dual-thumbstick.html">
+		<link rel="import" href="../webcomponents/responsive-grid-menu/responsive-grid-menu.html">
 	</head>
   
 	<!-- Body -->
 	<body>
 		
-		<div id="UI" class="full-screen">
-		
-		<!-- Video -->
-		<div class="video overlay">
-			<!-- Control elements -->
-			<dual-thumbstick></dual-thumbstick>
+		<view-manager>
 			
-			<img src="../img/mockvideo.jpeg" />
-		</div>
+			<app-menu>
+			</app-menu>
+			
+			<div id="actionBar">
+				
+				<wifi-widget>
+				</wifi-widget>
+				
+				<light-widget>
+				</light-widget>
+				
+				<compass-widget>
+				</compass-widget>
+				
+				<throttle-widget>
+				</throttle-widget>
+				
+				<battery-widget>
+				</battery-widget>
+				
+			</div>
+			
+			<settings-menu>
+			</settings-menu>
 		
-		<mobile-header class="overlay"></mobile-header>
-	
-	</div>	 
+		</view-manager> 
 	
 	</body>
   
