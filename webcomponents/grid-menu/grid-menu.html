@@ -36,23 +36,23 @@
 		
 		#container
 		{
+
 			display: inline-block;
 			border-radius: 5px;
 			background-color: rgba( 00, 00, 00, 0.5 );
-
-			width: 270px;
+			max-width: 210px;
 		}
 			
 		
 		#dropdown ::content grid-menu-button
 		{
+			margin: 3px;
 			display: inline-block;
 			color: white;
-			margin: 3px;
 			border: 0px solid white;
 			border-radius: 5px;
-			width: 80px;
-			height: 80px;
+			width: 60px;
+			height: 60px;
 		}
 		
 		#dropdown ::content grid-menu-button:hover 
@@ -178,6 +178,7 @@
 				
 				listeners: 
 				{
+					'cancel': 'cancel'
 				},
 				
 				behaviors:
@@ -202,6 +203,11 @@
 						return;
 					}
 					this.$.dropdown.open();
+				},
+				
+				cancel: function()
+				{
+					this.$.dropdown.close();
 				},
 				
 				/**

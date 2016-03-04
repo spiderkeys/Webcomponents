@@ -1,7 +1,12 @@
+
+/*Prevent overscroll behaviour, primarily for webapp*/
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body 
 {
-	height: 100%;
-	overflow: hidden; /* keeps scrollbar off IE */
 	font-family: arial,sans-serif;
 	font-size: 13px;
 	color: #000;
@@ -40,4 +45,9 @@ body
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+.topbar
+{
+	display: flexbox;
 }
